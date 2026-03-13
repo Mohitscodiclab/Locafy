@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Invoice Verification</title>
+
+<style>
+
+body{
+font-family:Arial, Helvetica, sans-serif;
+background:#f5f5f5;
+padding:40px;
+margin:0;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+h1{
+color:#2E7D32;
+margin-bottom:5px;
+}
+
+.subtitle{
+color:#777;
+margin-bottom:30px;
+}
+
+.section{
+margin-top:25px;
+font-size:16px;
+line-height:1.6;
+}
+
+.label{
+font-weight:bold;
+color:#333;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+border:1px solid #ddd;
+padding:10px;
+text-align:left;
+}
+
+th{
+background:#2E7D32;
+color:white;
+}
+
+.total{
+text-align:right;
+font-size:22px;
+margin-top:20px;
+font-weight:bold;
+color:#2E7D32;
+}
+
+.notice{
+margin-top:40px;
+padding:20px;
+background:#FFF3CD;
+border:1px solid #ffeeba;
+font-weight:bold;
+text-align:center;
+line-height:1.6;
+}
+
+.whatsapp-btn{
+
+display:inline-block;
+margin-top:25px;
+padding:14px 25px;
+background:#25D366;
+color:white;
+text-decoration:none;
+font-weight:bold;
+border-radius:6px;
+font-size:18px;
+
+}
+
+.whatsapp-btn:hover{
+background:#1ebe5d;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Hindustan Beej Bhandar</h1>
+<div class="subtitle">Thali Bazar, Near Petrol Pump</div>
+
+<div id="invoiceContent"></div>
+
+</div>
+
+<script>
+
+const data = JSON.parse(localStorage.getItem("hbb_invoice"));
+
+if(!data){
+document.getElementById("invoiceContent").innerHTML="<h2>No invoice data found</h2>";
+throw new Error("No invoice");
+}
+
+let rows="";
+let whatsappItems="";
+
+data.items.forEach(item=>{
+
+let subtotal=item.price*item.quantity;
+
+rows+=`
+<tr>
+<td>${item.name}</td>
+<td>${item.quantity}</td>
+<td>₹${item.price}</td>
+<td>₹${subtotal}</td>
+</tr>
+`;
+
+whatsappItems+=`${item.name} x${item.quantity} = ₹${subtotal}%0A`;
+
+});
+
+const whatsappMessage =
+
+`*HINDUSTAN BEEJ BHANDAR ORDER*%0A%0A`+
+`Invoice ID: ${data.invoiceId}%0A`+
+`Customer: ${data.customerName}%0A`+
+`Father Name: ${data.fatherName}%0A`+
+`Phone: ${data.phone}%0A%0A`+
+
+`*ORDER ITEMS*%0A`+
+`${whatsappItems}%0A`+
+
+`Grand Total: ₹${data.total}%0A%0A`+
+
+`UTR: ${data.utr}%0A%0A`+
+
+`I have also attached payment screenshot and order screenshot.`;
+
+const whatsappURL = `https://wa.me/919931753119?text=${whatsappMessage}`;
+
+document.getElementById("invoiceContent").innerHTML=`
+
+<div class="section">
+
+<div><span class="label">Invoice ID:</span> ${data.invoiceId}</div>
+<div><span class="label">Date:</span> ${data.date}</div>
+
+</div>
+
+<div class="section">
+
+<div><span class="label">Customer Name:</span> ${data.customerName}</div>
+<div><span class="label">Father Name:</span> ${data.fatherName}</div>
+<div><span class="label">Phone:</span> ${data.phone}</div>
+<div><span class="label">Email:</span> ${data.email}</div>
+
+</div>
+
+<div class="section">
+
+<div class="label">Address</div>
+
+${data.address}<br>
+${data.district}, ${data.state} - ${data.pincode}
+
+</div>
+
+<div class="section">
+
+<div><span class="label">Payment App:</span> ${data.paymentApp}</div>
+<div><span class="label">UTR / Transaction ID:</span> ${data.utr}</div>
+
+</div>
+
+<table>
+
+<tr>
+<th>Item</th>
+<th>Qty</th>
+<th>Price</th>
+<th>Total</th>
+</tr>
+
+${rows}
+
+</table>
+
+<div class="total">
+
+Grand Total : ₹${data.total}
+
+</div>
+
+<div class="notice">
+
+⚠️ IMPORTANT  
+
+1️⃣ Please SCREENSHOT this invoice page  
+
+2️⃣ Also take screenshot of your PAYMENT confirmation  
+
+3️⃣ Send both screenshots on WhatsApp to confirm your order.
+
+</div>
+
+<div style="text-align:center">
+
+<a class="whatsapp-btn" href="${whatsappURL}" target="_blank">
+📲 Send Order Details on WhatsApp
+</a>
+
+</div>
+
+`;
+
+</script>
+
+</body>
+</html>
