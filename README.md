@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=33&pause=1000&color=25D366&center=true&vCenter=true&width=800&lines=SYSTEM+ONLINE...;UPLINK+ESTABLISHED...;WELCOME+TO+HINDUSTAN+BEEJ+BHANDAR" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=700&size=33&pause=1000&color=25D366&center=true&vCenter=true&width=800&lines=SYSTEM+ONLINE...;UPLINK+ESTABLISHED...;WELCOME+TO...;HINDUSTAN+BEEJ+BHANDAR" alt="Typing SVG" />
 
 # 🌌 HBB-NEXUS: Hindustan Beej Bhandar
 
