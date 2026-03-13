@@ -7,7 +7,13 @@
 **"As Planetary Cycles Shift, We Adapt."** <br>
 *Sector Coordinates:* Thali Bazar, Near the Hydrocarbon Dispenser (Petrol Pump)
 
+
+
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png" width="100%">
+
+<a href="https://mohitscodiclab.github.io/HBB_Ecommerce/">
+  <img src="https://img.shields.io/badge/🚀_ENTER_THE_NEXUS-GO_TO_SHOP-25D366?style=for-the-badge&logo=rocket&logoColor=white" alt="Shop Link" />
+</a>
 
 </div>
 
@@ -23,72 +29,67 @@ Status: 100% READY FOR TERRAFORMING
 
 ```
 
+## 📡 SATELLITE IMAGERY [WEB-INTERFACE]
+
+*Visual logs of the terraforming terminal. Replace these placeholders with your actual screenshot URLs.*
+
+<div align="center">
+<img src="YOUR_SCREENSHOT_LINK_1" width="45%" alt="Mobile Interface" />
+<img src="YOUR_SCREENSHOT_LINK_2" width="45%" alt="Product Matrix" />
+
+
+
+
+
+<img src="YOUR_SCREENSHOT_LINK_3" width="91%" alt="Cart Logic View" />
+</div>
+
 ## 🛸 ABOUT THE OUTPOST
 
-Welcome to the **Hindustan Beej Bhandar (HBB)** digital interface. We are a premier agricultural distribution hub disguised as an e-commerce platform. Whether you are a local Earthling looking to cultivate your patch of land or an interstellar colonist attempting to terraform a new sector, our vault contains the highest-grade biological blueprints (seeds) and plant-defense mechanisms.
+Welcome to the **Hindustan Beej Bhandar (HBB)** digital interface. We are a premier agricultural distribution hub. Whether you are a local Earthling looking to cultivate your patch of land or an interstellar colonist attempting to terraform a new sector, our vault contains the highest-grade biological blueprints (seeds) and plant-defense mechanisms.
 
-**Our Mission:** To provide high-yield genetic flora, top-tier crop shields, and thermal-regulation beverages to hardworking agri-pilots everywhere.
+**🌍 Direct Access:** [https://mohitscodiclab.github.io/HBB_Ecommerce/](https://mohitscodiclab.github.io/HBB_Ecommerce/)
 
 ## 🧬 STATION INVENTORY
 
 <details>
 <summary><b>🌱 Terraforming Blueprints (Our Seeds)</b></summary>
-
-
-
-
-
 High-germination genetic material including Hybrid Lady's Finger, Boda, Pumpkin, and Ridge Gourd. Engineered for maximum yield in unpredictable planetary climates.
 </details>
 
 <details>
 <summary><b>🧪 Bio-Defense Mechanisms (Pesticides & Herbicides)</b></summary>
-
-
-
-
-
-Advanced chemical shielding protocols (like Super Killer and Weed Out Max) designed to eradicate hostile biological anomalies (pests) and parasitic growths (weeds) invading your crop sectors.
+Advanced chemical shielding protocols (like Super Killer and Weed Out Max) designed to eradicate hostile biological anomalies (pests) and parasitic growths (weeds).
 </details>
 
 <details>
 <summary><b>🧊 Cryo-Refreshments (Cold Drinks)</b></summary>
-
-
-
-
-
-Thermal-regulation fluids (Sprite, Thums Up) kept at sub-zero temperatures to restore the stamina of our agri-pilots during high-solar-radiation cycles.
+Thermal-regulation fluids (Sprite, Thums Up) kept at sub-zero temperatures to restore the stamina of our agri-pilots.
 </details>
 
 ## ⚙️ TECHNICAL ARCHITECTURE
 
-The HBB-Nexus was forged using lightweight, high-speed web technologies to ensure a zero-lag experience even on low-bandwidth orbital connections:
-
-* **Core Structure:** Advanced HTML5 Semantics
+* **Core Structure:** HTML5 Semantics
 * **Styling Engine:** CSS3 Glassmorphism with 3D Holographic Hover Effects
-* **Logic Matrix:** Vanilla JavaScript (ES6+) for real-time Cart Computation and Filtering
-* **Comms Link:** Automated WhatsApp API Integration for rapid order transmission
+* **Logic Matrix:** Vanilla JavaScript (ES6+) for real-time Cart Computation
+* **Comms Link:** Automated WhatsApp API Integration
 
 ## 🚀 HOW TO DEPLOY
 
-Want to run the HBB simulation on your local terminal?
-
-1. **Clone the Repository:**
 ```bash
+# Clone the Repository
 git clone [https://github.com/mohitscodiclab/HindustanBeejBhandar.git](https://github.com/mohitscodiclab/HindustanBeejBhandar.git)
 
+# Launch the Engine
+Simply open index.html in your preferred web browser.
+
 ```
-
-
-2. **Launch the Engine:**
-Simply open `index.html` in your preferred web browser. No complex node modules, no hyperspace bypasses required.
 
 ---
 
 ## ☕ FUEL THE CORE REACTOR (Support)
 
-Building and maintaining this planetary distribution hub requires high levels of caffeine and coding stamina. If you like the 3D parallax effects, the smooth cart system, and the sci-fi vibes, consider fueling the developer's reactor!
+Building and maintaining this planetary distribution hub requires high levels of caffeine. If you appreciate the 3D parallax effects and the sci-fi vibes, consider fueling the developer's reactor!
 
 <div align="center">
 
@@ -102,20 +103,8 @@ Building and maintaining this planetary distribution hub requires high levels of
 
 **Transmission Origin:** MOHITSCODICLAB 👽 | **Signal Status:** STRONG
 
-
-
-
-
 *© 2026 Hindustan Beej Bhandar. All Universal Rights Reserved.*
 
 <img src="https://www.google.com/search?q=https://capsule-render.vercel.app/api%3Ftype%3Dwave%26color%3D2E7D32%26height%3D100%26section%3Dfooter"/>
 
 </div>
-
-### What makes this sci-fi & interactive:
-
-1.  **Animated Typing SVG:** The very first thing people see is a green, retro-hacker typing animation that boots up the "system".
-2.  **Console Block:** Uses standard markdown code blocks to simulate a hacker/sci-fi terminal boot sequence.
-3.  **Dropdown Details:** Uses HTML `<details>` and `<summary>` tags to create interactive, folding menus for your inventory.
-4.  **Thematic Copywriting:** Translates your real-world items (Seeds, Pesticides, Drinks) into sci-fi equivalents (Terraforming Blueprints, Bio-Defense, Cryo-Refreshments).
-5.  **Buy Me A Coffee Badge:** Integrated as "Fueling the Core Reactor" to keep the theme going, using a clean, clickable shield badge.
