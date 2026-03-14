@@ -6,6 +6,8 @@
 
 <title>Invoice Verification</title>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
 <style>
 
 body{
@@ -264,7 +266,7 @@ document.getElementById("invoiceContent").innerHTML = `
 
 <div class="notice">
     ⚠️ IMPORTANT<br>
-    1️⃣ Please SCREENSHOT this invoice page<br>
+    1️⃣ Download The Invoice (PDF)<br>
     2️⃣ Also take screenshot of your PAYMENT confirmation<br>
     3️⃣ Send both on WhatsApp to confirm order.
 </div>
@@ -279,22 +281,45 @@ document.getElementById("invoiceContent").innerHTML = `
 </div>
 `;
 
-// PDF Download Function
+// Function that downlaods the professional invoice
 function downloadInvoice() {
-    const element = document.body; // Use body or container for better layout
+    // 1. Get the target element. Instead of the whole body, 
+    // we use just the main white container for a clean PDF look.
+    const element = document.querySelector('.container'); 
+    const invoiceId = data ? data.invoiceId : "Invoice";
+    
+    // 2. Proactively hide elements we DON'T want in the PDF 
+    // to prevent clutter and weird scaling.
+    const actionArea = document.querySelector('.action-area');
+    const notice = document.querySelector('.notice');
+    actionArea.style.display = 'none'; // Temporarily hide buttons
+    notice.style.display = 'none'; // Notice is useful on screen, not PDF
+
+    // 3. Define professional options
     const options = {
-        margin: 0.3,
-        filename: `HBB_Invoice_${data.invoiceId}.pdf`,
+        // Set filename precisely to the Invoice ID
+        filename: `${invoiceId}.pdf`,
+        
+        // Optimize image conversion quality (crucial for clarity)
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        
+        // Use high-resolution scaling during capture. This creates a sharp PDF.
+        html2canvas: { scale: 3 }, 
+        
+        // Define page settings
+        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+        
+        // CONTROL PAGE BREAKS. 
+        // This is the single key option that prevents content from splitting unprofessionally.
+        pagebreak: { mode: 'avoid-all' } 
     };
 
-    // Hide action area during PDF generation
-    document.querySelector('.action-area').style.display = 'none';
-    
+    // 4. Generate and save the PDF
+    // First apply settings, then capture the element, and finally save.
     html2pdf().set(options).from(element).save().then(() => {
-        document.querySelector('.action-area').style.display = 'flex';
+        // 5. Restore the screen visibility AFTER generation is complete
+        actionArea.style.display = 'flex'; // Buttons are back
+        notice.style.display = 'block'; // Notice is back
     });
 }
 </script>
