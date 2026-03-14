@@ -156,6 +156,18 @@
     "visible": true
   },
   {
+    "id": 104,
+    "name": "Tilmor E-Ox Electric Wheel Hoe",
+    "category": "Equipment",
+    "description": "Small Tractor for Weeding and Cultivating",
+    "price": "1,66,547.28",
+    "unit": "1 pc",
+    "image": "https://i.ibb.co/b5vNJsGb/Screenshot-2026-03-14-195033.png",
+    "emoji": "🌾",
+    "badge": "",
+    "visible": true
+  },
+  {
     "id": 12,
     "name": "Sprite",
     "category": "Cold Drinks",
