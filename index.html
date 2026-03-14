@@ -8,7 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Hindustan Beej Bhandar</title>
-    <link rel="icon" type="image/png" href="favicon.png">
 
     <style>
         /* ===============================
@@ -842,6 +841,35 @@ TOAST NOTIFICATION
 }
 
 
+
+
+.quote-wrapper {
+    font-family: 'Orbitron', sans-serif; /* Or Arial if Orbitron isn't loaded */
+    color: #FFD700; /* Gold color to match your original subtitle */
+    font-size: 1.1rem;
+    min-height: 2em;
+    margin-top: 10px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+#typing-quote::after {
+    content: "|";
+    color: #fff;
+    animation: blink 0.7s infinite;
+    margin-left: 2px;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+
+
+
+
+
     </style>
 
 </head>
@@ -851,7 +879,9 @@ TOAST NOTIFICATION
     <header class="hero">
 
         <h1>Hindustan Beej Bhandar</h1>
-        <p>"As Planetary Cycles Shift, We Adapt"</p>
+        <div class="quote-wrapper">
+    "<span id="typing-quote">As Season Changes We Adapt</span>"
+</div>
         <div class="parallax-bg"></div>
 
     </header>
@@ -870,6 +900,7 @@ TOAST NOTIFICATION
                 onclick="setFilter('Our Seeds',this)">Seeds</button> <button class="filter-btn"
                 onclick="setFilter('Pesticides',this)">Pesticides</button> <button class="filter-btn"
                 onclick="setFilter('Herbicides',this)">Herbicides</button> <button class="filter-btn"
+                onclick="setFilter('Equipment',this)">Equipment</button> <button class="filter-btn"
                 onclick="setFilter('Cold Drinks',this)">Cold Drinks</button>
 
         </div>
@@ -915,7 +946,6 @@ TOAST NOTIFICATION
                 <input class="form-control" name="Customer_Name" placeholder="Customer Name" required>
                 <input class="form-control" name="Father_Name" placeholder="Father Name" required>
                 <input class="form-control" name="Phone" placeholder="Phone" required>
-                <input class="form-control" name="Email" placeholder="Email" required>
 
                 <input class="form-control" name="Address" placeholder="Address" required>
                 <input class="form-control" name="District" placeholder="District" required>
@@ -1090,37 +1120,34 @@ function clearCart() {
     };
 
 
-            
 
-            
-// ===============================
-// our services Starts Again
-// ===============================
-    localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
-    await fetch(this.action, {
-        method: "POST",
-        body: fd,
-        headers: { Accept: "application/json" }
-    });
 
-    cart = [];
-    saveCart();
-    updateCartCount();
+//     localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
-    // Close the checkout modal automatically after success
-    document.getElementById("checkoutModal").style.display = "none";
+//     await fetch(this.action, {
+//         method: "POST",
+//         body: fd,
+//         headers: { Accept: "application/json" }
+//     });
+
+//     cart = [];
+//     saveCart();
+//     updateCartCount();
+
+//     // Close the checkout modal automatically after success
+//     document.getElementById("checkoutModal").style.display = "none";
     
-    window.open("invoice.html", "_blank");
-}); 
+//     window.open("invoice.html", "_blank");
+// }); 
 
 
-        
+
 // ===============================
 // our services stoped 
 // ===============================
 
-    // localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
+    localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
     // 🛑 COMMENT OUT OR DELETE FORMSPREE FETCH
     // await fetch(this.action, {
@@ -1132,11 +1159,11 @@ function clearCart() {
     // We will NOT clear the cart here, so if they go to WhatsApp, 
     // they can still look at what they wanted to buy!
 
-    // document.getElementById("checkoutModal").style.display = "none";
+    document.getElementById("checkoutModal").style.display = "none";
     
     // 🚀 REDIRECT TO YOUR NEW SUPPORT PAGE INSTEAD OF THE INVOICE
-    // window.location.href = "support.html";
-// });
+    window.location.href = "support.html";
+});
 
 
 
@@ -1347,6 +1374,68 @@ Add to Cart
 
     document.getElementById("cart-total").innerText = "Total: ₹" + total;
 }
+
+
+
+
+const quotes = [
+    "As Season Changes We Adapt",
+    "Engineered Seeds for a Changing World",
+    "Biological Excellence. Seasonal Resilience",
+    "Your Growth is Our Core Mission",
+    "Terraforming the Future, One Seed at a Time",
+    "Evolution in Every Single Grain"
+];
+
+let quoteIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+const typingSpeed = 80;    // Speed of typing each letter
+const deletingSpeed = 40;  // Speed of deleting each letter
+const pauseTime = 2000;    // Wait time at the end of a quote
+
+function startTypingEffect() {
+    const currentFullText = quotes[quoteIndex];
+    const displayElement = document.getElementById("typing-quote");
+
+    if (isDeleting) {
+        // Removing letters
+        displayElement.textContent = currentFullText.substring(0, charIndex - 1);
+        charIndex--;
+    } else {
+        // Adding letters
+        displayElement.textContent = currentFullText.substring(0, charIndex + 1);
+        charIndex++;
+    }
+
+    // Determine speed for next loop
+    let delta = isDeleting ? deletingSpeed : typingSpeed;
+
+    // Logic to switch between typing and deleting
+    if (!isDeleting && charIndex === currentFullText.length) {
+        // Pause at the end of the quote
+        isDeleting = true;
+        delta = pauseTime;
+    } else if (isDeleting && charIndex === 0) {
+        // Move to the next quote
+        isDeleting = false;
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+        delta = 500;
+    }
+
+    setTimeout(startTypingEffect, delta);
+}
+
+// Initialize when page loads
+document.addEventListener("DOMContentLoaded", () => {
+    // Small delay before starting
+    setTimeout(startTypingEffect, 1000);
+});
+
+
+
+
+
 
 function backToCart() {
     document.getElementById("checkoutModal").style.display = "none";
