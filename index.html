@@ -1087,31 +1087,38 @@ function clearCart() {
         date: new Date().toLocaleString("en-IN")
     };
 
-//     localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
-//     await fetch(this.action, {
-//         method: "POST",
-//         body: fd,
-//         headers: { Accept: "application/json" }
-//     });
+            
 
-//     cart = [];
-//     saveCart();
-//     updateCartCount();
+            
+// ===============================
+// our services Starts Again
+// ===============================
+    localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
-//     // Close the checkout modal automatically after success
-//     document.getElementById("checkoutModal").style.display = "none";
+    await fetch(this.action, {
+        method: "POST",
+        body: fd,
+        headers: { Accept: "application/json" }
+    });
+
+    cart = [];
+    saveCart();
+    updateCartCount();
+
+    // Close the checkout modal automatically after success
+    document.getElementById("checkoutModal").style.display = "none";
     
-//     window.open("invoice.html", "_blank");
-// }); 
+    window.open("invoice.html", "_blank");
+}); 
+
+
+        
 // ===============================
 // our services stoped 
 // ===============================
 
-
-
-
-    localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
+    // localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
     // 🛑 COMMENT OUT OR DELETE FORMSPREE FETCH
     // await fetch(this.action, {
@@ -1123,11 +1130,11 @@ function clearCart() {
     // We will NOT clear the cart here, so if they go to WhatsApp, 
     // they can still look at what they wanted to buy!
 
-    document.getElementById("checkoutModal").style.display = "none";
+    // document.getElementById("checkoutModal").style.display = "none";
     
     // 🚀 REDIRECT TO YOUR NEW SUPPORT PAGE INSTEAD OF THE INVOICE
-    window.location.href = "support.html";
-});
+    // window.location.href = "support.html";
+// });
 
 
 
