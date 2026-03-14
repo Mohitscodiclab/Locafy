@@ -257,17 +257,38 @@ function downloadInvoice() {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice - Hindustan Beej Bhandar</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
     <style>
         body { font-family: 'Segoe UI', sans-serif; background: #f5f5f5; padding: 20px; margin: 0; }
-
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -276,60 +297,28 @@ function downloadInvoice() {
             border-radius: 8px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
-
-        /* PDF MODE FIXES */
-        .pdf-mode { background: white !important; padding: 0 !important; }
-        .pdf-mode .container { box-shadow: none !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; }
+        /* Mode for clean capture without shadows/padding */
+        .snapshot-mode { background: white !important; padding: 0 !important; }
+        .snapshot-mode .container { box-shadow: none !important; margin: 0 !important; width: 100% !important; max-width: 100% !important; border-radius: 0 !important; }
 
         h1 { color: #2E7D32; margin: 0; }
         .subtitle { color: #666; font-size: 14px; margin-bottom: 20px; }
-        
         .section { margin-top: 20px; font-size: 14px; line-height: 1.6; }
         .label { font-weight: bold; }
-
-        /* TABLE FIXES FOR TEXT CUTTING */
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-            table-layout: fixed; /* Column size fix */
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-            word-wrap: break-word; /* Text ko line ke bahar nahi jane dega */
-            vertical-align: top;
-        }
-
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; table-layout: fixed; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; word-wrap: break-word; vertical-align: top; }
         th { background: #2E7D32; color: white; }
-
-        /* Column Widths */
         .col-item { width: 45%; }
         .col-qty { width: 15%; }
         .col-price { width: 20%; }
         .col-total { width: 20%; }
-
-        .total-row {
-            text-align: right;
-            font-size: 20px;
-            margin-top: 20px;
-            font-weight: bold;
-            color: #2E7D32;
-        }
-
+        .total-row { text-align: right; font-size: 20px; margin-top: 20px; font-weight: bold; color: #2E7D32; }
         .notice { margin-top: 30px; padding: 15px; background: #FFF3CD; text-align: center; font-weight: bold; }
-
         .action-area { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
         .btn { padding: 12px 20px; border-radius: 5px; cursor: pointer; font-weight: bold; text-decoration: none; border: none; color: white; }
         .whatsapp-btn { background: #25D366; }
         .download-btn { background: #1976D2; }
-
-        @media print {
-            thead { display: table-header-group; }
-            tr { page-break-inside: avoid; } /* Row ko beech se nahi kategi */
-        }
+        @media print { thead { display: table-header-group; } tr { page-break-inside: avoid; } }
     </style>
 </head>
 <body>
@@ -353,7 +342,7 @@ function getUnit(base, qty) {
 if (data) {
     let rows = "";
     let grandTotal = 0;
-    let waText = "";
+    let itemsText = ""; 
 
     data.items.forEach(i => {
         const price = parseFloat(String(i.price).replace(/,/g, '')) || 0;
@@ -369,10 +358,21 @@ if (data) {
             <td>₹${sub.toLocaleString('en-IN')}</td>
         </tr>`;
         
-        waText += `${i.name} (${measure}) x${i.quantity} = ₹${sub.toLocaleString('en-IN')}%0A`;
+        itemsText += `• ${i.name} (${measure}) x${i.quantity} = ₹${sub.toLocaleString('en-IN')}%0A`;
     });
 
     const totalStr = grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+
+    const fullWaMessage = `*HINDUSTAN BEEJ BHANDAR ORDER*%0A%0A` +
+        `*Invoice:* ${data.invoiceId}%0A` +
+        `*Date:* ${data.date}%0A` +
+        `*Customer:* ${data.customerName}%0A` +
+        `*Father's Name:* ${data.fatherName}%0A` +
+        `*Phone:* ${data.phone}%0A` +
+        `*Address:* ${data.address}, ${data.district}, ${data.state}%0A` +
+        `*Payment:* ${data.paymentApp} | *UTR:* ${data.utr}%0A%0A` +
+        `*ITEMS:*%0A${itemsText}%0A` +
+        `*Grand Total: ₹${totalStr}*`;
 
     document.getElementById("content").innerHTML = `
         <div class="section">
@@ -397,44 +397,47 @@ if (data) {
 
         <div class="total-row">Grand Total : ₹${totalStr}</div>
 
-        <div class="notice">⚠️ Download PDF & Send to WhatsApp to confirm your order</div>
+        <div class="notice">⚠️ Take Snapshot & Send to WhatsApp to confirm your order</div>
 
         <div class="action-area">
-            <a class="btn whatsapp-btn" href="https://wa.me/919931753119?text=*HINDUSTAN BEEJ BHANDAR ORDER*%0A${waText}%0ATotal: ₹${totalStr}">Send WhatsApp</a>
-            <button class="btn download-btn" onclick="downloadPDF()">Download PDF</button>
+            <a class="btn whatsapp-btn" href="https://wa.me/919931753119?text=${fullWaMessage}">Send WhatsApp</a>
+            <button class="btn download-btn" onclick="takeSnapshot()">Take Snapshot</button>
         </div>
     `;
 }
 
-function downloadPDF() {
+// CHANGED: New function to take a high-quality full-page screenshot
+function takeSnapshot() {
     const element = document.getElementById('invoice-box');
     const action = document.querySelector('.action-area');
     const notice = document.querySelector('.notice');
 
-    // Setup for clean capture
-    document.body.classList.add('pdf-mode');
+    // Prepare for clean snapshot
+    document.body.classList.add('snapshot-mode');
     action.style.display = 'none';
     notice.style.display = 'none';
 
-    const opt = {
-        margin: [0.3, 0.3, 0.3, 0.3],
-        filename: `${data.invoiceId}.pdf`,
-        image: { type: 'jpeg', quality: 1 },
-        html2canvas: { scale: 3, scrollY: 0, useCORS: true, letterRendering: true },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
-    };
+    // Using html2canvas for universal device compatibility
+    html2canvas(element, {
+        scale: 3, // High resolution (works great for mobile and desktop)
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        logging: false,
+        windowWidth: element.scrollWidth,
+        windowHeight: element.scrollHeight
+    }).then(canvas => {
+        // Create link and download the image
+        const link = document.createElement('a');
+        link.download = `Invoice_${data.invoiceId}.png`;
+        link.href = canvas.toDataURL("image/png");
+        link.click();
 
-    // Tiny timeout to ensure CSS applies
-    setTimeout(() => {
-        html2pdf().set(opt).from(element).save().then(() => {
-            document.body.classList.remove('pdf-mode');
-            action.style.display = 'flex';
-            notice.style.display = 'block';
-        });
-    }, 500);
+        // Restore UI
+        document.body.classList.remove('snapshot-mode');
+        action.style.display = 'flex';
+        notice.style.display = 'block';
+    });
 }
 </script>
 </body>
 </html>
-
