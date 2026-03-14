@@ -1121,11 +1121,10 @@ function clearCart() {
     };
 
 
-
-
 // ===============================
-// our services Started
+// Our services Started
 // ===============================
+
 
     localStorage.setItem("hbb_invoice", JSON.stringify(orderData));
 
@@ -1166,7 +1165,7 @@ function clearCart() {
     // document.getElementById("checkoutModal").style.display = "none";
     
     // 🚀 REDIRECT TO YOUR NEW SUPPORT PAGE INSTEAD OF THE INVOICE
-//     window.location.href = "support.html";
+    // window.location.href = "support.html";
 // });
 
 
@@ -1351,16 +1350,21 @@ Add to Cart
 
         }
 
-        function renderCart() {
+       function renderCart() {
     const c = document.getElementById("cart-items");
     c.innerHTML = "";
     let total = 0;
 
     cart.forEach(i => {
-        let sub = i.price * i.quantity;
+        // 1. Convert price to string (in case it's a number), 
+        // 2. Remove commas, 
+        // 3. Convert to a proper decimal number
+        const cleanPrice = parseFloat(String(i.price).replace(/,/g, '')) || 0;
+        const quantity = parseInt(i.quantity) || 0;
+        
+        let sub = cleanPrice * quantity;
         total += sub;
 
-        // Upgraded Cart Item HTML
         c.innerHTML += `
         <div class="cart-item">
             <div class="cart-item-info">
@@ -1368,15 +1372,19 @@ Add to Cart
             </div>
             <div class="cart-qty-controls">
                 <button class="qty-btn" onclick="changeQty(${i.id},-1)">-</button>
-                <div class="qty-text">${i.quantity}</div>
+                <div class="qty-text">${quantity}</div>
                 <button class="qty-btn" onclick="changeQty(${i.id},1)">+</button>
             </div>
-            <div class="cart-item-subtotal">₹${sub}</div>
+            <div class="cart-item-subtotal">₹${sub.toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
         </div>
         `;
     });
 
-    document.getElementById("cart-total").innerText = "Total: ₹" + total;
+    // Display the total with Indian currency formatting
+    document.getElementById("cart-total").innerText = "Total: ₹" + total.toLocaleString('en-IN', {
+        minimumFractionDigits: 2, 
+        maximumFractionDigits: 2
+    });
 }
 
 
