@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=200&size=33&pause=1000&color=25D366&center=true&vCenter=true&width=800&lines=SYSTEM+ONLINE...;UPLINK+ESTABLISHED...;WELCOME+TO...;HINDUSTAN+BEEJ+BHANDAR" alt="Typing SVG" />
+<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=100&size=33&pause=1000&color=25D366&center=true&vCenter=true&width=800&lines=SYSTEM+ONLINE...;UPLINK+ESTABLISHED...;WELCOME+TO...;LOCAFY" alt="Typing SVG" />
 
-# 🌌 HBB-NEXUS: Hindustan Beej Bhandar
+# 🌌 Locafy-NEXUS: Hindustan Beej Bhandar
 
 **"As Planetary Cycles Shift, We Adapt."** <br>
 *Sector Coordinates:* Thali Bazar, Near the Hydrocarbon Dispenser (Petrol Pump)
