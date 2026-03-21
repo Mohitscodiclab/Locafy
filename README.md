@@ -18,16 +18,7 @@
 </div>
 
 ## 🖥️ SYSTEM TERMINAL [INITIALIZED]
-
-```console
-root@HBB-Mainframe:~# ./boot_sequence.sh
-[OK] Loading Biological Payloads (Seeds)...
-[OK] Initializing Flora-Defense Systems (Pesticides)...
-[OK] Engaging Cryo-Coolers (Cold Drinks)...
-[OK] Establishing Neural Link with WhatsApp API...
-Status: 100% READY FOR TERRAFORMING
-
-```
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=15&pause=1000&color=11F408&multiline=true&width=700&height=250&lines=%5B0.021%5D+Initializing+system+kernel...;%5B0.089%5D+Mounting+%2Fdev%2FLocafy_core...;%5B0.142%5D+Loading+Biological+Payloads+(Seeds)+..........+%5B++OK++%5D;%5B0.198%5D+Initializing+Flora-Defense+Systems+(Pesticides)+%5B++OK++%5D;%5B0.254%5D+Engaging+Cryo-Coolers+(Cold+Drinks)+..........+%5B++OK++%5D;%5B0.301%5D+Establishing+Neural+Link+with+WhatsApp+API+...+%5B++OK++%5D;%5B0.347%5D+Syncing+Inventory+Matrix+.....................+%5B++OK++%5D;%5B0.392%5D+Activating+ShopBridge+Protocol+...............+%5B++OK++%5D;%5B0.431%5D+Deploying+Marketplace+Interface+..............+%5B++OK++%5D)](https://git.io/typing-svg)
 
 ## 📡 SATELLITE IMAGERY [WEB-INTERFACE]
 
