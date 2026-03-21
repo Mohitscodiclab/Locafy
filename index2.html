@@ -1,0 +1,267 @@
+<!--<html>
+<head>
+</head>
+<body>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=15&pause=1000&color=11F408&multiline=true&width=700&height=250&lines=%5B0.021%5D+Initializing+system+kernel...;%5B0.089%5D+Mounting+%2Fdev%2FLocafy_core...;%5B0.142%5D+Loading+Biological+Payloads+(Seeds)+..........+%5B++OK++%5D;%5B0.198%5D+Initializing+Flora-Defense+Systems+(Pesticides)+%5B++OK++%5D;%5B0.254%5D+Engaging+Cryo-Coolers+(Cold+Drinks)+..........+%5B++OK++%5D;%5B0.301%5D+Establishing+Neural+Link+with+WhatsApp+API+...+%5B++OK++%5D;%5B0.347%5D+Syncing+Inventory+Matrix+.....................+%5B++OK++%5D;%5B0.392%5D+Activating+ShopBridge+Protocol+...............+%5B++OK++%5D;%5B0.431%5D+Deploying+Marketplace+Interface+..............+%5B++OK++%5D" alt="Typing SVG" /></a>
+
+</body>
+
+
+</html>-->
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locafy_Core | Console</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #11F408; /* Default Green */
+            font-family: 'Fira Code', monospace;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            text-shadow: 0 0 5px rgba(17, 244, 8, 0.4);
+        }
+
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none; z-index: 100;
+        }
+
+        #overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; display: flex; justify-content: center; align-items: center; z-index: 200;
+        }
+
+        .btn-init {
+            border: 2px solid #11F408; padding: 15px 35px; background: transparent;
+            color: #11F408; font-family: inherit; font-size: 1.1rem; letter-spacing: 3px;
+            cursor: pointer; transition: 0.3s;
+        }
+
+        .btn-init:hover { background-color: #11F408; color: #000; box-shadow: 0 0 30px #11F408; }
+
+        #top-screen {
+            width: 90%;
+            max-width: 800px;
+            height: 250px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background: #000;
+            border: 2px solid rgba(17, 244, 8, 0.2);
+        }
+
+        #top-screen img { max-width: 100%; height: auto; }
+
+        #main-terminal {
+            width: 90%;
+            max-width: 700px;
+            height: 20vh;
+            margin: 20px auto;
+            border: 1px solid rgba(17, 244, 8, 0.2);
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: none;
+            scroll-behavior: smooth;
+            background: rgba(0, 0, 0, 0.9);
+            position: relative;
+            transition: border-color 0.3s ease;
+        }
+
+        #main-terminal.abort-sequence {
+            border-color: #ff3333;
+            box-shadow: inset 0 0 20px rgba(255, 51, 51, 0.2);
+        }
+
+        #main-terminal::-webkit-scrollbar { display: none; }
+
+        .log-line { margin: 4px 0; font-size: 14px; line-height: 1.4; white-space: pre-wrap; }
+        
+        .system { color: #11F408; text-shadow: 0 0 8px #11F408; } 
+        .process { color: #00CCFF; text-shadow: 0 0 8px #00CCFF; } 
+        .action  { color: #FFFF00; text-shadow: 0 0 8px #FFFF00; } 
+        .success { color: #11F408; font-weight: bold; text-shadow: 0 0 10px #11F408; }
+        .danger  { color: #ff3333; font-weight: bold; text-shadow: 0 0 10px #ff3333; }
+        
+        .cursor { display: inline-block; width: 8px; height: 15px; background: #11F408; animation: blink 0.8s infinite; }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        .footer-hint {
+            position: fixed; bottom: 10px; width: 100%; text-align: center;
+            font-size: 10px; color: rgba(17, 244, 8, 0.4); text-transform: uppercase;
+        }
+
+        pre { margin: 0; padding: 0; font-family: inherit; }
+    </style>
+</head>
+<body>
+
+<div class="crt-overlay"></div>
+
+<div id="overlay">
+    <button class="btn-init" onclick="startBooting()">BOOT LOCAFY_OS</button>
+</div>
+
+<div id="top-screen">
+    <img id="boot-svg" src="" alt="" />
+</div>
+
+<div id="main-terminal">
+    <div id="log-output"></div>
+    <span class="cursor"></span>
+</div>
+
+<div class="footer-hint">PRESS [CTRL + C] TO ABORT AND BYPASS | Press [CTRL + R] to Restart</div>
+
+<script>
+    const CONFIG = {
+        SVG_PRE_DELAY: 7000, // Time before showing SVG (simulate loading)
+        DOWNLOAD_SPEED: 50,
+        PACKET_SEND_SPEED: 1200,
+        FIREWALL_BYPASS_SPEED: 2000,
+        BOOT_FINALIZE_SPEED: 400,
+        LINE_BY_LINE_DELAY: 1500,
+        REDIRECT_DELAY: 4000,
+        PROFILE_DISPLAY_DELAY: 4000 // Time user can see your ASCII art and info
+    };
+
+    const logOutput = document.getElementById('log-output');
+    const terminal = document.getElementById('main-terminal');
+    const bootImg = document.getElementById('boot-svg');
+    let isTerminated = false;
+
+    const SVG_URL ="https://readme-typing-svg.herokuapp.com?font=Nabla&weight=1000&size=15&pause=1&color=0B21F4&multiline=true&repeat=false&width=700&height=250&lines=%5B0.021%5D+Initializing+system+kernel...;%5B0.089%5D+Mounting+%2Fdev%2FLocafy_core...;%5B0.142%5D+Loading+Biological+Payloads+(Seeds)+..........+%5B++OK++%5D;%5B0.198%5D+Initializing+Flora-Defense+Systems+(Pesticides)+%5B++OK++%5D;%5B0.254%5D+Engaging+Cryo-Coolers+(Cold+Drinks)+..........+%5B++OK++%5D;%5B0.301%5D+Establishing+Neural+Link+with+WhatsApp+API+...+%5B++OK++%5D;%5B0.347%5D+Syncing+Inventory+Matrix+.....................+%5B++OK++%5D;%5B0.347%5D+Syncing+Inventory+Matrix+.....................+%5B++OK++%5D;%5B0.392%5D+Activating+ShopBridge+Protocol+...............+%5B++OK++%5D;%5B0.431%5D+Deploying+Marketplace+Interface+..............+%5B++OK++%5D";
+    
+    window.addEventListener('keydown', (e) => {
+        if (e.ctrlKey && e.key.toLowerCase() === 'c') {
+            isTerminated = true;
+            terminal.classList.add('abort-sequence');
+            appendLog("<span class='danger'><br>[!] TERMINAL INTERRUPT DETECTED.</span>");
+            appendLog("<span class='danger'>[!] ABORTING ALL SEQUENCES...</span>");
+            setTimeout(() => window.location.href = "index1.html", 3000);
+        }
+    });
+
+    function appendLog(html, type = 'system') {
+        const div = document.createElement('div');
+        div.className = `log-line ${type}`;
+        div.innerHTML = html;
+        logOutput.appendChild(div);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    async function showProgress(task, speed, colorClass = 'process') {
+        if (isTerminated) return;
+        const p = document.createElement('div');
+        p.className = `log-line ${colorClass}`;
+        logOutput.appendChild(p);
+        
+        for (let i = 0; i <= 100; i += Math.floor(Math.random() * 10) + 2) {
+            if (isTerminated) break;
+            if (i > 100) i = 100;
+            const hashes = "#".repeat(Math.floor(i / 5));
+            const dots = ".".repeat(20 - hashes.length);
+            p.innerHTML = `${task} [${hashes}${dots}] ${i}%`;
+            terminal.scrollTop = terminal.scrollHeight;
+            await new Promise(r => setTimeout(r, speed));
+        }
+        if (!isTerminated) p.innerHTML = `${task} [####################] 100% <span class="success">DONE</span>`;
+    }
+
+
+
+
+
+
+    const imageArt = `
+[±_±] 𝙺̲𝙽̲𝙾̲𝚆̲𝙻̲𝚆̲𝙳̲𝙶̲𝙴̲ 𝙸̲𝚂̲ 𝙵̲𝚁̲𝙴̲𝙴̲ 𝙱̲𝚄̲𝚃̲ 𝚆̲𝙴̲ 𝙰̲𝚁̲𝙴̲ 𝙴̲𝚅̲𝙴̲𝚁̲𝚈̲𝚆̲𝙴̲𝚁̲𝙴̲ [±_±]
+    `;
+
+
+
+
+const profileArt = `
+      .--.
+     |o_o |      USER: MOHITSCODICLAB
+     |:_/ |      OS: Locafy OS
+    //   \\ \\     SHELL: bash
+   (|     | )    CPU: Neural Engine v2
+  /'\\_   _/\\\`    MEMORY: 16GB
+  \\___)=(___/    STATUS: ONLINE
+`;
+
+
+async function startBooting() {
+    document.getElementById('overlay').style.display = 'none';
+    bootImg.src = SVG_URL;
+
+    await new Promise(r => setTimeout(r, CONFIG.SVG_PRE_DELAY));
+    if (isTerminated) return;
+
+    // 1. DISPLAY ASCII PROFILE WITH TIME CONTROL
+    appendLog("[SYSTEM] Unauthorized Access Detected...", "action");
+    await new Promise(r => setTimeout(r, 800));
+    
+    const artContainer = document.createElement('pre');
+    artContainer.className = "log-line process"; 
+    artContainer.style.fontSize = "10px";
+    artContainer.innerText = imageArt + profileArt;
+    logOutput.appendChild(artContainer);
+    
+    terminal.scrollTop = terminal.scrollHeight;
+    
+    // Pause for user to read details
+    await new Promise(r => setTimeout(r, CONFIG.PROFILE_DISPLAY_DELAY));
+
+    if (isTerminated) return;
+
+    // 2. CONTINUE TO EXPLOIT
+    appendLog("[SYSTEM] Initializing Packet Injection...", "system");
+    await showProgress("DOWNLOADING INDEX_DATA", CONFIG.DOWNLOAD_SPEED, "process");
+    
+    await new Promise(r => setTimeout(r, CONFIG.LINE_BY_LINE_DELAY));
+    appendLog("[EXPLOIT] Target Node: 192.168.1.104 (PORT 80)", "action");
+    appendLog("[EXPLOIT] Commencing DDoS Flood Strategy...", "action");
+    
+    for(let i=0; i<5; i++) {
+        if (isTerminated) return;
+        appendLog(` > Sending Packet Segment ${i+1}... [SIZE: 1024kb]`, "process");
+        await new Promise(r => setTimeout(r, CONFIG.PACKET_SEND_SPEED));
+    }
+
+    await showProgress("BYPASSING FIREWALL", CONFIG.FIREWALL_BYPASS_SPEED, "action");
+    
+    await new Promise(r => setTimeout(r, CONFIG.LINE_BY_LINE_DELAY));
+    appendLog("[SUCCESS] Handshake verified.", "success");
+    appendLog("[SUCCESS] index1.html buffer stored in temporary RAM.", "success");
+    
+    await showProgress("FINALIZING BOOT", CONFIG.BOOT_FINALIZE_SPEED, "system");
+
+    appendLog("<br><span class='success'>[1.000] SYSTEM STABLE. LAUNCHING INTERFACE...</span>");
+    
+    if (!isTerminated) {
+        setTimeout(() => window.location.href = "index1.html", CONFIG.REDIRECT_DELAY);
+    }
+}
+</script>
+
+</body>
+</html>
