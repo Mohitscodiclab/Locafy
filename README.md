@@ -11,7 +11,7 @@
 
 <img src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/grass.png" width="100%">
 
-<a href="https://mohitscodiclab.github.io/locafy/">
+<a href="https://mohitscodiclab.github.io/Locafy/">
   <img src="https://img.shields.io/badge/🚀_ENTER_THE_NEXUS-GO_TO_SHOP-25D366?style=for-the-badge&logo=rocket&logoColor=white" alt="Shop Link" />
 </a>
 
@@ -56,7 +56,7 @@ Status: 100% READY FOR TERRAFORMING
 
 
 <div align="center">
-  <h3><a href="https://mohitscodiclab.github.io/locafy/">🚀 ESTABLISH CONNECTION TO LIVE SERVER</a></h3>
+  <h3><a href="https://mohitscodiclab.github.io/Locafy/">🚀 ESTABLISH CONNECTION TO LIVE SERVER</a></h3>
 </div>
 
 ## 🛸 ABOUT THE OUTPOST
