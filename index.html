@@ -68,10 +68,10 @@ body {
 }
 
 /* TOP */
-#top-terminal { height:300px; }
+#top-terminal { height:250px; }
 
 /* BOTTOM */
-#main-terminal { height:25vh; }
+#main-terminal { height:20vh; }
 
 /* SCROLL GLOW */
 #top-terminal::after,
@@ -113,7 +113,24 @@ body {
     letter-spacing: 1px;
 }
 
+#mobile-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    display: flex;
+    gap: calc(90vw - 50vw) 10px; /* Dynamic gap based on screen size */
+}
 
+#mobile-controls button {
+    display: block;
+    margin: 5px 0;
+    background: black;
+    color: #11F408;
+    border: 1px solid #11F408;
+    padding: 8px 12px;
+    font-family: 'Fira Code';
+}
 
 
 
@@ -149,8 +166,24 @@ body {
 </div>
 
 
+<div id="mobile-controls">
+    <button onclick="triggerAbort()">ABORT</button>
+    <button onclick="location.reload()">RESTART</button>
+</div>
+
+
 <script>
 
+
+
+
+function triggerAbort() {
+    const event = new KeyboardEvent('keydown', {
+        key: 'c',
+        ctrlKey: true
+    });
+    window.dispatchEvent(event);
+}
 /* ================= CONFIG ================= */
 const CONFIG = {
     TOP_SPEED: 1000,
