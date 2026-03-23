@@ -117,7 +117,7 @@
 <div class="crt-overlay"></div>
 
 <div id="overlay">
-    <button class="btn-init" onclick="startBooting()">BOOT LOCAFY_OS</button>
+    <button class="btn-init" onclick="enterFullscreen()">BOOT LOCAFY_OS</button>
 </div>
 
 <div id="top-screen">
@@ -142,6 +142,23 @@
         REDIRECT_DELAY: 4000,
         PROFILE_DISPLAY_DELAY: 4000 // Time user can see your ASCII art and info
     };
+
+
+
+    function enterFullscreen() {
+    const el = document.documentElement;
+
+    if (el.requestFullscreen) {
+        el.requestFullscreen();
+    } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+    } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+    }
+
+    // Start your boot after fullscreen
+    startBooting();
+}
 
     const logOutput = document.getElementById('log-output');
     const terminal = document.getElementById('main-terminal');
@@ -192,7 +209,7 @@
 
 
     const imageArt = `
-[±_±] 𝙺̲𝙽̲𝙾̲𝚆̲𝙻̲𝚆̲𝙳̲𝙶̲𝙴̲ 𝙸̲𝚂̲ 𝙵̲𝚁̲𝙴̲𝙴̲ 𝙱̲𝚄̲𝚃̲ 𝚆̲𝙴̲ 𝙰̲𝚁̲𝙴̲ 𝙴̲𝚅̲𝙴̲𝚁̲𝚈̲𝚆̲𝙴̲𝚁̲𝙴̲ [±_±]
+[±_±] KNOWLEDGE IS FREE BUT WE ARE EVERYWHERE [±_±]
     `;
 
 
