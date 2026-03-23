@@ -102,6 +102,21 @@ body {
 }
 
 @keyframes blink {50%{opacity:0}}
+
+.footer-hint {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    color: rgba(17, 244, 8, 0.4);
+    letter-spacing: 1px;
+}
+
+
+
+
+
 </style>
 
 </head>
@@ -128,6 +143,11 @@ body {
     <div id="log-output"></div>
     <span class="cursor"></span>
 </div>
+
+<div class="footer-hint">
+    PRESS [CTRL + C] TO STOP EXPLOITING | PRESS [CTRL + R] TO RESTART
+</div>
+
 
 <script>
 
@@ -156,22 +176,10 @@ const bottomTerminal = document.getElementById("main-terminal");
 
 let isTerminated = false;
 
-/* ================= CTRL + C ABORT ================= */
-window.addEventListener('keydown', (e) => {
-    if (e.ctrlKey && e.key.toLowerCase() === 'c') {
-        isTerminated = true;
+/* ================= DELAY ================= */
+function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
 
-        topTerminal.classList.add('abort-sequence');
-        bottomTerminal.classList.add('abort-sequence');
-
-        log(topOut, "[!] TERMINAL INTERRUPT DETECTED.", "danger");
-        log(topOut, "[!] ABORTING ALL SEQUENCES...", "danger");
-
-        setTimeout(() => window.location.href = CONFIG.REDIRECT_PAGE, 3000);
-    }
-});
-
-/* ================= LOG FUNCTION ================= */
+/* ================= LOG ================= */
 function log(target, text, cls="system"){
     if (isTerminated) return;
 
@@ -183,8 +191,51 @@ function log(target, text, cls="system"){
     target.parentElement.scrollTop = target.parentElement.scrollHeight;
 }
 
-/* ================= DELAY ================= */
-function delay(ms){ return new Promise(r=>setTimeout(r,ms)); }
+/* ================= FORCE LOG (for errors) ================= */
+function forceLog(target, text, cls="system"){
+    const div = document.createElement("div");
+    div.className = "log-line " + cls;
+    div.innerHTML = text;
+
+    target.appendChild(div);
+    target.parentElement.scrollTop = target.parentElement.scrollHeight;
+}
+
+/* ================= CTRL EVENTS ================= */
+window.addEventListener('keydown', async (e) => {
+
+    // CTRL + C → ABORT WITH ERROR
+    if (e.ctrlKey && e.key.toLowerCase() === 'c') {
+
+        if (isTerminated) return;
+
+        await delay(50);
+        isTerminated = true;
+
+        topTerminal.classList.add('abort-sequence');
+        bottomTerminal.classList.add('abort-sequence');
+
+        forceLog(topOut, "<br>[!] TERMINAL INTERRUPT DETECTED", "danger");
+        await delay(400);
+
+        forceLog(topOut, "[ERROR] Firewall Breach Unsuccessful", "danger");
+        await delay(400);
+
+        forceLog(topOut, "[ERROR] Connection Lost...", "danger");
+        await delay(400);
+
+        forceLog(topOut, "<br>[SYSTEM] Transferring you to Locafy Interface...", "action");
+
+        await delay(1200);
+        window.location.href = CONFIG.REDIRECT_PAGE;
+    }
+
+    // CTRL + R → RESTART
+    if (e.ctrlKey && e.key.toLowerCase() === 'r') {
+        location.reload();
+    }
+
+});
 
 /* ================= PROGRESS BAR ================= */
 async function showProgress(target, task, speed, cls="process") {
@@ -222,10 +273,10 @@ const profileArt = `
       .--.
      |o_o |      USER: MOHITSCODICLAB
      |:_/ |      OS: Locafy OS
-    //   \\\\     SHELL: bash
+    //   \\\\    SHELL: bash
    (|     | )    CPU: Neural Engine v2
-  /'\\_   _/\\\`    MEMORY: 16GB
-  \\___)=(___/    STATUS: ONLINE
+  /'\\_   _/\\\` MEMORY: 16GB
+  \\___)=(___/   STATUS: ONLINE
 `;
 
 /* ================= TOP TERMINAL ================= */
@@ -263,7 +314,7 @@ async function runTopTerminal(){
     await showProgress(topOut,"WIPE SEQUENCE", CONFIG.FINALIZE_SPEED, "danger");
 
     log(topOut,"[SUCCESS] SYSTEM FULLY COMPROMISED", "success");
-    log(topOut,"Forfully Running LOCAFY","Hijacking");
+    log(topOut,"Forcefully Running LOCAFY","action");
 
     if(CONFIG.AUTO_REDIRECT && !isTerminated){
         setTimeout(()=>{
@@ -272,7 +323,7 @@ async function runTopTerminal(){
     }
 }
 
-/* ================= BOTTOM TERMINAL (EXTRA PAYLOAD LOGS) ================= */
+/* ================= BOTTOM TERMINAL ================= */
 async function runBottomTerminal(){
 
     const logs = [
@@ -314,6 +365,7 @@ function start(){
 }
 
 </script>
+
 
 </body>
 </html>
